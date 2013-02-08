@@ -66,23 +66,27 @@ $.ajax({
 
 And in Backbone
 
-```javascript
-var collection = Backbone.Collection.extend({
-  url: '/database/collection',
-  // drill down to the actual results
-  parse: function(response) {
-    return response.results;
-  }
-});
 
-collection.fetch({
-  data: {
-    filter: {
-      type: 'blogs'
-    }
-    // etc.
-  }
-});
+```javascript
+  var Song = Backbone.Model.extend({
+      urlRoot: '/database/song',
+      idAttribute: "_id",
+  });
+
+
+
+
+ var Album = Backbone.Collection.extend({
+        url: '/database/song',
+        model: Song,
+        // drill down to the actual results
+        parse: function(response) {
+            return response.results;
+       },
+    });
+
+
+Albums = new Album
 ```
 
 Save document
